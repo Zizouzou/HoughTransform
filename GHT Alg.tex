@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+%\title{Package Test: algorithm/algorithmic}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\begin{document}
+\begin{algorithm}
+\caption{Build R-Table}
+\begin{algorithmic}
+
+\REQUIRE Edges of the shape to detect
+\STATE $R \leftarrow 0$ \COMMENT{Empty nested list}
+\STATE $y \leftarrow$ Reference point
+\FORALL{$x \in Edges$}
+    \STATE $\phi \leftarrow$ Direction of gradient at $x$
+    \STATE $r \leftarrow x - y$
+    \STATE Append $R[\phi]$ with $r$
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Detection}
+\begin{algorithmic}
+
+\REQUIRE Edges of image
+\STATE $A \leftarrow 0$ \COMMENT{Empty 2D array of same size as the image}
+\STATE $R \leftarrow $ \textbf{BuildRTable}(Shape) 
+\FORALL{$x \in Edges$}
+    \STATE $\phi \leftarrow$ Direction of gradient at $x$
+    \FORALL{$r$ in $R[\phi]$}
+        \STATE $A[r] ++$
+    \ENDFOR
+\ENDFOR
+
+\STATE \textbf{return} \textbf{LocalMaxima}($A$)
+
+\end{algorithmic}
+\end{algorithm}
+
+
+\end{document}
